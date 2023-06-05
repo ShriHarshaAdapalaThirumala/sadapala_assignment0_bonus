@@ -12,5 +12,6 @@ Create a new environment
 conda create --prefix ./env python -y
 conda activate ./env
 pip3 install torch torchvision torchaudio
-conda install jupyter pandas numpy matplotlib scikit-learn tqdm 
+conda install jupyter pandas numpy matplotlib scikit-learn tqdm
+pip3 install Flask
 ```
