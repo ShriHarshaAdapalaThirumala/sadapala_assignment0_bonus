@@ -4,5 +4,4 @@ pandas
 numpy
 torch
 matplotlib
-pickle
 gunicorn
