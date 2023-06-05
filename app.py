@@ -50,6 +50,39 @@ def predict_api():
     
     return jsonify(y_hat.item())
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    data={}
+    
+    for key in request.form.keys():
+        data[key] = request.form[key]
+    
+    x = pd.DataFrame([data])[input_features]
+    # Label Encoding
+    for feature in input_features:
+        x[feature] = label_encoders[feature].transform(x[feature])
+    
+    # One Hot Encoding
+    final_input_features = input_features.copy()
+    for feature in input_features:
+        x = transformers[feature].transform(x)
+        final_input_features.remove(feature)
+        final_input_features = list(transformers[feature].transformers_[0][1].get_feature_names_out()) + final_input_features
+        
+        if type(x) == np.ndarray:
+            x = pd.DataFrame(x, columns = final_input_features)
+        else:
+            x = pd.DataFrame(x.toarray(), columns = final_input_features)
+    
+    
+    x = torch.tensor(x.values, requires_grad=False).float()
+    
+    nn_model.train(False)
+    with torch.inference_mode():
+        y_hat = nn_model(x)
+    
+    return render_template('home.html', prediction_text = 'the predicted air quality is: {0}'.format(y_hat.item()))
+
 if __name__ == '__main__':
     app.run(debug=True)
     

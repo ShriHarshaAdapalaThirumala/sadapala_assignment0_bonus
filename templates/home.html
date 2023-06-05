@@ -1,3 +1,210 @@
-<h1>
-    Hello World!!!!
-</h1>
+<!DOCTYPE html>
+<html>
+    <body>
+        <div>
+            <h1>
+                Air Quality Prediction
+            </h1>
+
+            <h1>
+            <! -- Main Input For Receiving Query to out ML-- >
+            <form action = "{{url_for('predict')}}"method='post'>
+                
+                <input type="text", name="Name", placeholder="Name", list="NameList", required="required" /><br>
+                <datalist id="NameList">
+                    <option value="Ozone (O3)"></option>
+                    <option value="Sulfur Dioxide (SO2)"></option>
+                    <option value="PM2.5-Attributable Deaths"></option>
+                    <option value="Boiler Emissions- Total SO2 Emissions"></option>
+                    <option value="Boiler Emissions- Total PM2.5 Emissions"></option>
+                    <option value="Boiler Emissions- Total NOx Emissions"></option>
+                    <option value="Air Toxics Concentrations- Average Benzene Concentrations"></option>
+                    <option value="Air Toxics Concentrations- Average Formaldehyde Concentrations"></option>
+                    <option value="PM2.5-Attributable Asthma Emergency Department Visits"></option>
+                    <option value="PM2.5-Attributable Respiratory Hospitalizations (Adults 20 Yrs and Older)"></option>
+                    <option value="PM2.5-Attributable Cardiovascular Hospitalizations (Adults 40 Yrs and Older)"></option>
+                    <option value="Traffic Density- Annual Vehicle Miles Traveled"></option>
+                    <option value="O3-Attributable Cardiac and Respiratory Deaths"></option>
+                    <option value="O3-Attributable Asthma Emergency Department Visits"></option>
+                    <option value="O3-Attributable Asthma Hospitalizations"></option>
+                    <option value="Traffic Density- Annual Vehicle Miles Traveled for Cars"></option>
+                    <option value="Traffic Density- Annual Vehicle Miles Traveled for Trucks"></option>
+                    <option value="Nitrogen Dioxide (NO2)"></option>
+                    <option value="Fine Particulate Matter (PM2.5)"></option>
+                </datalist>
+
+                <input type="text", name="Measure", placeholder="Measure", list="MeasureList", required="required" /><br>
+                <datalist id="MeasureList">
+                    <<option value="Mean"></option>
+                    <option value="Estimated Annual Rate - Adults 30 Yrs and Older"></option>
+                    <option value="Number per km2"></option>
+                    <option value="Annual Average Concentration"></option>
+                    <option value="Estimated Annual Rate- Children 0 to 17 Yrs Old"></option>
+                    <option value="Estimated Annual Rate"></option>
+                    <option value="million miles"></option>
+                    <option value="Estimated Annual Rate- 18 Yrs and Older"></option>
+                </datalist>
+
+                <input type="text", name="Measure Info", placeholder="Measure Info", list="MeasureInfoList", required="required" /><br>
+                <datalist id="MeasureInfoList">
+                    <option value="ppb"></option>
+                    <option value="per 100,000 adults"></option>
+                    <option value="number"></option>
+                    <option value="µg/m3"></option>
+                    <option value="per 100,000 children"></option>
+                    <option value="per km2"></option>
+                    <option value="per 100,000 residents"></option>
+                    <option value="mcg per cubic meter"></option>
+                </datalist>
+
+                <input type="text", name="Geo Type Name", placeholder="Geo Type Name", list="GeoTypeList", required="required" /><br>
+                <datalist id="GeoTypeList">
+                    <option value="CD"></option>
+                    <option value="Borough"></option>
+                    <option value="UHF42"></option>
+                    <option value="Citywide"></option>
+                    <option value="UHF34"></option>
+                </datalist>
+
+                <input type="text", name="Geo Place Name", placeholder="Geo Place Name", list="GeoPlaceList", required="required" /><br>
+                <datalist id="GeoPlaceList">
+                    <option value="Coney Island (CD13)"></option>
+                    <option value="Bronx"></option>
+                    <option value="Morris Park and Bronxdale (CD11)"></option>
+                    <option value="Williamsbridge and Baychester (CD12)"></option>
+                    <option value="Brooklyn"></option>
+                    <option value="Greenpoint and Williamsburg (CD1)"></option>
+                    <option value="Fort Greene and Brooklyn Heights (CD2)"></option>
+                    <option value="Bedford Stuyvesant (CD3)"></option>
+                    <option value="Bushwick (CD4)"></option>
+                    <option value="East New York and Starrett City (CD5)"></option>
+                    <option value="Park Slope and Carroll Gardens (CD6)"></option>
+                    <option value="Sunset Park (CD7)"></option>
+                    <option value="Crown Heights and Prospect Heights (CD8)"></option>
+                    <option value="Belmont and East Tremont (CD6)"></option>
+                    <option value="Kingsbridge Heights and Bedford (CD7)"></option>
+                    <option value="Kingsbridge - Riverdale"></option>
+                    <option value="Northeast Bronx"></option>
+                    <option value="Fordham - Bronx Pk"></option>
+                    <option value="Pelham - Throgs Neck"></option>
+                    <option value="Crotona -Tremont"></option>
+                    <option value="High Bridge - Morrisania"></option>
+                    <option value="Hunts Point - Mott Haven"></option>
+                    <option value="Greenpoint"></option>
+                    <option value="Downtown - Heights - Slope"></option>
+                    <option value="Bedford Stuyvesant - Crown Heights"></option>
+                    <option value="East New York"></option>
+                    <option value="Sunset Park"></option>
+                    <option value="Borough Park"></option>
+                    <option value="East Flatbush - Flatbush"></option>
+                    <option value="Canarsie - Flatlands"></option>
+                    <option value="Bensonhurst - Bay Ridge"></option>
+                    <option value="Coney Island - Sheepshead Bay"></option>
+                    <option value="Williamsburg - Bushwick"></option>
+                    <option value="Washington Heights"></option>
+                    <option value="Central Harlem - Morningside Heights"></option>
+                    <option value="East Harlem"></option>
+                    <option value="Upper West Side"></option>
+                    <option value="Upper East Side"></option>
+                    <option value="Chelsea - Clinton"></option>
+                    <option value="Gramercy Park - Murray Hill"></option>
+                    <option value="Greenwich Village - SoHo"></option>
+                    <option value="Union Square - Lower East Side"></option>
+                    <option value="Lower Manhattan"></option>
+                    <option value="Long Island City - Astoria"></option>
+                    <option value="West Queens"></option>
+                    <option value="Flushing - Clearview"></option>
+                    <option value="Bayside - Little Neck"></option>
+                    <option value="Ridgewood - Forest Hills"></option>
+                    <option value="Fresh Meadows"></option>
+                    <option value="Riverdale and Fieldston (CD8)"></option>
+                    <option value="Southwest Queens"></option>
+                    <option value="Jamaica"></option>
+                    <option value="Southeast Queens"></option>
+                    <option value="Rockaways"></option>
+                    <option value="Port Richmond"></option>
+                    <option value="Stapleton - St. George"></option>
+                    <option value="Willowbrook"></option>
+                    <option value="South Beach - Tottenville"></option>
+                    <option value="New York City"></option>
+                    <option value="Manhattan"></option>
+                    <option value="Queens"></option>
+                    <option value="Staten Island"></option>
+                    <option value="Parkchester and Soundview (CD9)"></option>
+                    <option value="Bensonhurst (CD11)"></option>
+                    <option value="Throgs Neck and Co-op City (CD10)"></option>
+                    <option value="Financial District (CD1)"></option>
+                    <option value="Greenwich Village and Soho (CD2)"></option>
+                    <option value="Lower East Side and Chinatown (CD3)"></option>
+                    <option value="Clinton and Chelsea (CD4)"></option>
+                    <option value="Midtown (CD5)"></option>
+                    <option value="Stuyvesant Town and Turtle Bay (CD6)"></option>
+                    <option value="Upper West Side (CD7)"></option>
+                    <option value="Upper East Side (CD8)"></option>
+                    <option value="Morningside Heights and Hamilton Heights (CD9)"></option>
+                    <option value="Central Harlem (CD10)"></option>
+                    <option value="East Harlem (CD11)"></option>
+                    <option value="Washington Heights and Inwood (CD12)"></option>
+                    <option value="Mott Haven and Melrose (CD1)"></option>
+                    <option value="Hunts Point and Longwood (CD2)"></option>
+                    <option value="Morrisania and Crotona (CD3)"></option>
+                    <option value="Highbridge and Concourse (CD4)"></option>
+                    <option value="Fordham and University Heights (CD5)"></option>
+                    <option value="South Crown Heights and Lefferts Gardens (CD9)"></option>
+                    <option value="Bay Ridge and Dyker Heights (CD10)"></option>
+                    <option value="Borough Park (CD12)"></option>
+                    <option value="Flatbush and Midwood (CD14)"></option>
+                    <option value="Sheepshead Bay (CD15)"></option>
+                    <option value="Brownsville (CD16)"></option>
+                    <option value="East Flatbush (CD17)"></option>
+                    <option value="Flatlands and Canarsie (CD18)"></option>
+                    <option value="Long Island City and Astoria (CD1)"></option>
+                    <option value="Woodside and Sunnyside (CD2)"></option>
+                    <option value="Jackson Heights (CD3)"></option>
+                    <option value="Elmhurst and Corona (CD4)"></option>
+                    <option value="Ridgewood and Maspeth (CD5)"></option>
+                    <option value="Rego Park and Forest Hills (CD6)"></option>
+                    <option value="Flushing and Whitestone (CD7)"></option>
+                    <option value="Hillcrest and Fresh Meadows (CD8)"></option>
+                    <option value="Kew Gardens and Woodhaven (CD9)"></option>
+                    <option value="South Ozone Park and Howard Beach (CD10)"></option>
+                    <option value="Bayside and Little Neck (CD11)"></option>
+                    <option value="Jamaica and Hollis (CD12)"></option>
+                    <option value="Queens Village (CD13)"></option>
+                    <option value="Rockaway and Broad Channel (CD14)"></option>
+                    <option value="St. George and Stapleton (CD1)"></option>
+                    <option value="South Beach and Willowbrook (CD2)"></option>
+                    <option value="Tottenville and Great Kills (CD3)"></option>
+                    <option value="Upper East Side-Gramercy"></option>
+                    <option value="Chelsea-Village"></option>
+                    <option value="Union Square-Lower Manhattan"></option>
+                    <option value="Bayside Little Neck-Fresh Meadows"></option>
+                    <option value="Northern SI"></option>
+                    <option value="Southern SI"></option>
+                    <option value="South Bronx"></option>
+                </datalist>
+
+                <input type="text", name="Season", placeholder="Season", list="SeasonList", required="required" /><br>
+                <datalist id="SeasonList">
+                    <option value="Summer"></option>
+                    <option value="Winter"></option>
+                    <option value="no_mention"></option>
+                    <option value="Annual Average"></option>
+                </datalist>
+
+
+
+                <button type="submit", class = 'btn btn-primary btn-block btn-large'>Predict</button>
+            </form>
+
+        </h1>
+
+            <br>
+            <br>
+
+        </div>
+
+        {{prediction_text}}
+
+    </body>
+</html>
